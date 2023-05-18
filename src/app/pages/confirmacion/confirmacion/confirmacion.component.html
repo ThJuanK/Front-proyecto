@@ -1,0 +1,60 @@
+<div class = "mt-5">
+  <p-panel class = 'justify-content-center text-align-center'>
+    <h1 class = "text-center">¿Deseas Renovar nuestros servicios?</h1>
+    <p-card class="text-center"> Te ofrecemos estas opciones: </p-card>
+  </p-panel>
+
+  <div class="grid mt-2 justify-content-center">
+    <div class="col-10 md:col-3">
+      <p-card>
+        <h1 class = "text-center"> Opción 1</h1>
+        <ul class = "ml-8">
+          <li>Caracteristica 1</li>
+          <li>Caracteristica 2</li>
+          <li>Caracteristica 3</li>
+        </ul>
+      </p-card>
+    </div>
+
+    <div class="col-10 md:col-3">
+      <p-card >
+        <h1 class = "text-center"> Opción 2</h1>
+        <ul class = "ml-8">
+          <li>Caracteristica 1</li>
+          <li>Caracteristica 2</li>
+          <li>Caracteristica 3</li>
+          <li>Caracteristica 4</li>
+        </ul>
+      </p-card>
+    </div>
+
+    <div class="col-10 md:col-3">
+      <p-card >
+        <h1 class = "text-center"> Opción 3</h1>
+        <ul class = "ml-8">
+          <li>Caracteristica 1</li>
+          <li>Caracteristica 2</li>
+
+        </ul>
+      </p-card>
+    </div>
+  </div>
+
+  <div class="grid mt-2 justify-content-center">
+    <div class="col-11 md:col-6">
+      <p-card class = "text-center" header = "¿Confirmar?">
+        <p-card class = "justify-self-center">
+          <p-button class = "m-2" label="Aceptar" icon="pi pi-check" (click)="enviar()"></p-button>
+          <p-button class = "m-2" styleClass=" p-button-danger" label = "Rechazar" icon = "pi pi-times"></p-button>
+        </p-card>
+      </p-card>
+    </div>
+  </div>
+
+  <div grid mt-2 justify-content-center>
+    <div class="col-8 md:col-5">
+      <p-messages [(value)]="notificacion" [enableService]="false" [closable]="true"></p-messages>
+    </div>
+  </div>
+</div>
+
