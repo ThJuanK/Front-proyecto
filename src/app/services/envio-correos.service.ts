@@ -16,4 +16,11 @@ export class EnvioCorreosService {
     console.log("Enviado!")
   }
 
+
+  comprobar(id:string): any{
+    this.http.get(`https://confirmacion-python.herokuapp.com/comprobar/${id}`)
+    .subscribe(resp =>{
+      return {"existe": resp}
+    })
+  }
 }

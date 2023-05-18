@@ -13,18 +13,24 @@ export class ConfirmacionComponent implements OnInit{
   public menuItems: MenuItem[] = [];
   public notificacion!: Message[];
 
-  constructor(private route: ActivatedRoute,  private router: Router, private envios: EnvioCorreosService){}
-
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute,  private router: Router, private envios: EnvioCorreosService){
     localStorage.clear();
 
     this._id = this.route.snapshot.queryParamMap.get('_id')!
-    console.log(this._id)
 
     if(!this._id) this.router.navigate(['error'])
     else{
       localStorage.setItem('_id', this._id)
+      console.log(this.envios.comprobar(this._id))
+      if(this.envios.comprobar(this._id)) {
+        console.log("id invalida")
+        this.router.navigate(['error'])
+      }
     }
+  }
+
+  ngOnInit(): void {
+
   }
 
   enviar(){
