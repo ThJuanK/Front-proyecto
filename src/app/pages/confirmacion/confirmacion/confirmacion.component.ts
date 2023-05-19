@@ -48,7 +48,6 @@ export class ConfirmacionComponent implements OnInit{
 
   notificar(){
     if(!this.pulsado){
-      this.pulsado = true
       Swal.fire({
         title: '¿Seguro que no quieres renovar?',
         showDenyButton: true,
@@ -58,6 +57,7 @@ export class ConfirmacionComponent implements OnInit{
         if (result.isConfirmed) {
 
         } else if (result.isDenied) {
+          this.pulsado = true
           Swal.fire({title: 'Gracias! :(', showConfirmButton: false})
           this.cerrar()
         }
