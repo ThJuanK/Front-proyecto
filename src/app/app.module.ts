@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ConfirmacionComponent } from './pages/confirmacion/confirmacion/confirmacion.component';
 import { PrimeNgModule } from './prime-ng/prime-ng.module';
 import { ErrorComponent } from './pages/error-component/error/error.component';
+import { VerificacionComponent } from './pages/confirmacion/verificacion/verificacion.component';
 
 
 
@@ -15,7 +16,8 @@ import { ErrorComponent } from './pages/error-component/error/error.component';
   declarations: [
     AppComponent,
     ConfirmacionComponent,
-    ErrorComponent
+    ErrorComponent,
+    VerificacionComponent
   ],
   imports: [
     BrowserModule,

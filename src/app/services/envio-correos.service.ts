@@ -8,19 +8,27 @@ export class EnvioCorreosService {
 
   constructor(private http: HttpClient) { }
 
+  private id: string = ""
+  obj!: boolean;
+
+  setId(id: string): void{
+    this.id = id
+  }
+  getId(): string{
+    return this.id
+  }
+
+  setObj(obj: boolean){
+    this.obj = obj
+  }
+
   enviarCorreo(id: string): void{
     this.http.get(`https://confirmacion-python.herokuapp.com/id/${id}`)
     .subscribe(
       () => {}
     )
-    console.log("Enviado!")
   }
 
 
-  comprobar(id:string): any{
-    this.http.get(`https://confirmacion-python.herokuapp.com/comprobar/${id}`)
-    .subscribe(resp =>{
-      return {"existe": resp}
-    })
-  }
+
 }

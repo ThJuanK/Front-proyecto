@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { EnvioCorreosService } from 'src/app/services/envio-correos.service';
 import { MenuItem, Message} from 'primeng/api';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-confirmacion',
@@ -12,40 +13,64 @@ export class ConfirmacionComponent implements OnInit{
   private _id!: string;
   public menuItems: MenuItem[] = [];
   public notificacion!: Message[];
+  private pulsado: boolean = false
 
-  constructor(private route: ActivatedRoute,  private router: Router, private envios: EnvioCorreosService){
-    localStorage.clear();
-
-    this._id = this.route.snapshot.queryParamMap.get('_id')!
-
-    if(!this._id) this.router.navigate(['error'])
-    else{
-      localStorage.setItem('_id', this._id)
-      console.log(this.envios.comprobar(this._id))
-      if(this.envios.comprobar(this._id)) {
-        console.log("id invalida")
-        this.router.navigate(['error'])
-      }
-    }
+  constructor(private envios: EnvioCorreosService, private router: Router){
+    this._id = this.envios.getId()
   }
 
   ngOnInit(): void {
-
+    this.router.navigateByUrl("confirmacion")
+    console.log(this.envios.obj)
+    if(!this.envios.obj){
+      this.router.navigateByUrl("error")
+    }
   }
 
   enviar(){
-    this.notificacion= [
-      { severity: 'success', summary: '¡gracias!', detail: 'Te enviaremos un correo de confirmación.' },
-    ];
+    if(!this.pulsado){
+      this.pulsado = true
+      this.notificacion= [
+        { severity: 'success', summary: '¡gracias!', detail: 'Te enviaremos un correo de confirmación.' },
+      ];
 
-    console.log("AAAAAAAAAAAAA")
+      this.envios.enviarCorreo(this._id)
 
-    //this.envios.enviarCorreo(this._id)
+      this.agradecer()
 
-    this.cerrar()
+      this.cerrar()
+    }
   }
 
   cerrar(){
     setTimeout(() => window.close(), 5000)
+  }
+
+  notificar(){
+    if(!this.pulsado){
+      this.pulsado = true
+      Swal.fire({
+        title: '¿Seguro que no quieres renovar?',
+        showDenyButton: true,
+        confirmButtonText: 'Volver',
+        denyButtonText: `Aceptar`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+        } else if (result.isDenied) {
+          Swal.fire({title: 'Gracias! :(', showConfirmButton: false})
+          this.cerrar()
+        }
+      })
+    }
+  }
+
+  agradecer(){
+    Swal.fire({
+      title: 'Gracias',
+      text: 'Te hemos enviado un correo de confirmación',
+      icon: 'success',
+      showConfirmButton: false
+    });
   }
 }

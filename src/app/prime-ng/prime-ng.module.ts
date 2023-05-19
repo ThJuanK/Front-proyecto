@@ -5,6 +5,7 @@ import { CardModule } from 'primeng/card';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { MessagesModule } from 'primeng/messages';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
   exports:[
@@ -13,7 +14,8 @@ import { MessagesModule } from 'primeng/messages';
     CardModule,
     FieldsetModule,
     PanelModule,
-    MessagesModule
+    MessagesModule,
+    ConfirmPopupModule
   ]
 })
 export class PrimeNgModule { }
